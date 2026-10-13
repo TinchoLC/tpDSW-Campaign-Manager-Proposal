@@ -182,8 +182,8 @@ Regularidad:
 
 |Req|Detalle|
 |:-|:-|
-|CRUD simple|1. CRUD Usuario<br>2. CRUD Campaña<br>3. CRUD Rasgo|
-|CRUD dependiente|1. CRUD Personaje {depende de} CRUD Usuario<br>2. CRUD Participación (PersonajeCampana) {depende de} CRUD Usuario, CRUD Jugable y CRUD Campaña|
+|CRUD simple|1. CRUD Usuario<br>2. CRUD Campana<br>3. CRUD Rasgo|
+|CRUD dependiente|1. CRUD Personaje {depende de} CRUD Usuario<br>2. CRUD PersonajeCampana {depende de} CRUD Usuario, CRUD Jugable y CRUD Campana|
 |Listado<br>+<br>detalle|1. Listado de campañas filtrado por estado, muestra nombre, master e imagen => detalle permite unirse y entrar a la sesión<br>2. Listado de NPC filtrado por estadoAgresión, muestra nombre y descripción => detalle con todos los atributos|
 |CUU/Epic|1. CUU Crear mapa para una campaña asignando imagen y dimensiones de grilla<br>2. CUU Posicionar y mover fichas de personajes o NPCs en la grilla bidimensional del mapa|
 
@@ -193,7 +193,7 @@ Regularidad:
 
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD Usuario<br>2. CRUD Campaña<br>3. CRUD Participación (PersonajeCampana)<br>4. CRUD Personaje<br>5. CRUD Jugable<br>6. CRUD NoJugable<br>7. CRUD Objeto<br>8. CRUD CatObjeto<br>9. CRUD Rasgo<br>10. CRUD Acción<br>11. CRUD Mapa|
+|CRUD |1. CRUD Usuario<br>2. CRUD Campana<br>3. CRUD PersonajeCampana<br>4. CRUD Personaje<br>5. CRUD Jugable<br>6. CRUD NoJugable<br>7. CRUD Objeto<br>8. CRUD CatObjeto<br>9. CRUD Rasgo<br>10. CRUD Accion<br>11. CRUD Mapa|
 |CUU/Epic|1. Crear un personaje con atributos, habilidades, estadísticas y objetos<br>2. Sistema de chat entre jugadores en partida.<br>3. Consultar estado y posición de fichas de personajes en el mapa activo<br>4. Modificar atributos y gestionar objetos durante la campaña|
 
 ---
@@ -203,5 +203,5 @@ Regularidad:
 |Req|Detalle|
 |:-|:-|
 |Listados |1. Listado de objetos de un personaje filtrado por categoría, muestra nombre y valor => detalle con descripción e imagen|
-|CUU/Epic|1. Invitar usuario a campaña privada y confirmar ingreso<br>2. Asignar personaje a campaña|
+|CUU/Epic|1. Invitar usuario a campaña privada y confirmar ingreso<br>2. Registro de bitácora y notas de sesión para la campaña|
 |Otros|1. Envío de invitación o notificación por email<br>2. Sistema de dados que puede utilizarse en campaña y escribe resultado por el chat|
