@@ -8,6 +8,11 @@
 
 ---
 
+## Link Monorepo
+* https://github.com/TinchoLC/tpDSW-Campaign-Manager-Dev
+
+---
+
 ## Tema
 
 ### Descripción
@@ -27,6 +32,7 @@ classDiagram
         ID
         nombre
         descripción
+        imagenUrl
         estado
     }
 
@@ -34,19 +40,14 @@ classDiagram
         ID
         nombre
         descripción
+        imagenUrl
         estado
     }
 
     class FICHA_MAPA {
         posición
         estado
-    }
-
-    class imagen {
-        ID
-        nombre
-        descripción
-        archivo
+        imagenUrl
     }
 
     class CatObjeto {
@@ -58,6 +59,7 @@ classDiagram
         id
         nombre
         descripción
+        imagenUrl
         visibleAJugador
         valor
     }
@@ -67,12 +69,14 @@ classDiagram
         nombre
         contraseña
         tipo
+        imagenUrl
     }
 
     class Personaje {
         ID
         nombre
         descripción
+        imagenUrl
         especie
         armadura
         iniciativa
@@ -139,14 +143,11 @@ classDiagram
 
     %% Relaciones
     CAMPAÑA "1" *-- "0..*" MAPA
-    MAPA "0..*" -- "1" imagen : tiene >
     MAPA "1" -- "0..*" FICHA_MAPA : tiene >
 
-    FICHA_MAPA "0..*" -- "0..1" imagen
     FICHA_MAPA "0..*" -- "0..1" NoJugable
 
     CatObjeto "1" o-- "0..*" Objeto
-    Objeto "0..*" -- "0..1" imagen
     Objeto "0..*" -- "0..*" Personaje : tiene (Cantidad) >
 
     Personaje <|-- JUGABLE
@@ -189,7 +190,7 @@ Regularidad:
 
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD Usuario<br>2. CRUD Campaña<br>3. CRUD Participación<br>4. CRUD Personaje<br>5. CRUD Jugable<br>6. CRUD NoJugable<br>7. CRUD Objeto<br>8. CRUD CatObjeto<br>9. CRUD Rasgo<br>10. CRUD Acción<br>11. CRUD Estadística<br>12. CRUD Imagen|
+|CRUD |1. CRUD Usuario<br>2. CRUD Campaña<br>3. CRUD Participación<br>4. CRUD Personaje<br>5. CRUD Jugable<br>6. CRUD NoJugable<br>7. CRUD Objeto<br>8. CRUD CatObjeto<br>9. CRUD Rasgo<br>10. CRUD Acción<br>11. CRUD Mapa|
 |CUU/Epic|1. Crear un personaje con atributos, habilidades, estadísticas y objetos<br>2. Sistema de chat entre jugadores en partida.<br>3. Consultar estado y posición de fichas de personajes en el mapa activo<br>4. Modificar atributos y gestionar objetos durante la campaña|
 
 ---

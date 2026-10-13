@@ -1,35 +1,3 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
-
-# Environment variables / secrets
-.env
-.env.*
-!.env.example
-!**/.env.example
-
-# Build outputs
-dist/
-build/
-coverage/
-out/
-
-# Prisma generated client & Native binaries
-**/src/generated/
-**/generated/
-*.node
-*.dll
-*.dylib
-*.so
-
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
 # OS metadata
 .DS_Store
 Thumbs.db
@@ -37,17 +5,5 @@ ehthumbs.db
 desktop.ini
 
 # IDEs
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
-.history/
+.vscode/
 .idea/
-
-# Frontend caches & tools
-.angular/
-.vite/
-.turbo/
-*.vsix
