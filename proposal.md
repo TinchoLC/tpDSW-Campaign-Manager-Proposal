@@ -28,54 +28,56 @@ Facilita la interacción entre jugadores y directores de juego, así como el seg
 classDiagram
     direction TB
 
-    class CAMPAÑA {
-        ID
+    class Campana {
+        id
         nombre
-        descripción
+        descripcion
         imagenUrl
         estado
     }
 
-    class MAPA {
-        ID
+    class Mapa {
+        id
         nombre
-        descripción
+        descripcion
         imagenUrl
         estado
     }
 
-    class FICHA_MAPA {
-        posición
+    class FichaMapa {
+        id
+        posicionX
+        posicionY
         estado
         imagenUrl
     }
 
     class CatObjeto {
-        ID
+        id
         nombre
     }
 
     class Objeto {
         id
         nombre
-        descripción
+        descripcion
         imagenUrl
         visibleAJugador
         valor
     }
 
-    class USUARIO {
-        ID
+    class Usuario {
+        id
         nombre
-        contraseña
+        contrasena
         tipo
         imagenUrl
     }
 
     class Personaje {
-        ID
+        id
         nombre
-        descripción
+        descripcion
         imagenUrl
         especie
         armadura
@@ -84,13 +86,13 @@ classDiagram
         vidaMax
         fuerza
         destreza
-        constitución
+        constitucion
         inteligencia
         carisma
-        sabiduría
+        sabiduria
     }
 
-    class JUGABLE {
+    class Jugable {
         nivel
         manaMax
         clase
@@ -104,23 +106,23 @@ classDiagram
     }
 
     class Rasgo {
-        ID
+        id
         nombre
         visibleAJugador
-        descripción
+        descripcion
         nivelMinimo
     }
 
-    class Acción {
-        ID
+    class Accion {
+        id
         nombre
         visibleAJugador
-        descripción
+        descripcion
         costoMana
     }
 
-    class PersonajeCampaña {
-        ID
+    class PersonajeCampana {
+        id
         nombre
         armadura
         iniciativa
@@ -135,40 +137,41 @@ classDiagram
         manaActual
         fuerza
         destreza
-        constitución
-        sabiduría
+        constitucion
+        sabiduria
         carisma
         inteligencia
+        estado
     }
 
     %% Relaciones
-    CAMPAÑA "1" *-- "0..*" MAPA
-    MAPA "1" -- "0..*" FICHA_MAPA : tiene >
+    Campana "1" *-- "0..*" Mapa : contiene >
+    Mapa "1" -- "0..*" FichaMapa : tiene >
 
-    FICHA_MAPA "0..*" -- "0..1" NoJugable
+    FichaMapa "0..*" -- "0..1" NoJugable : representa >
+    FichaMapa "0..*" -- "0..1" PersonajeCampana : representa >
 
     CatObjeto "1" o-- "0..*" Objeto
     Objeto "0..*" -- "0..*" Personaje : tiene (Cantidad) >
 
-    Personaje <|-- JUGABLE
+    Personaje <|-- Jugable
     Personaje <|-- NoJugable
 
     Personaje "0..*" -- "0..*" Rasgo : tiene >
-    Personaje "0..*" -- "0..*" Acción
-    CAMPAÑA "0..1" -- "0..*" Personaje
-    CAMPAÑA "0..1" -- "0..1" NoJugable
+    Personaje "0..*" -- "0..*" Accion : tiene >
 
-    USUARIO "0..1" -- "0..*" CAMPAÑA : crea >
-    USUARIO "0..*" -- "1..1" CAMPAÑA : participa >
-    USUARIO "0..1" -- "0..*" JUGABLE : crea >
+    Campana "1" -- "0..*" NoJugable : contiene >
 
-    CAMPAÑA "1..*" -- "0..*" PersonajeCampaña : participan
-    USUARIO "1" -- "0..*" PersonajeCampaña
-    JUGABLE "1" -- "0..*" PersonajeCampaña
+    Usuario "1" -- "0..*" Campana : crea >
+    Usuario "1" -- "0..*" Jugable : crea >
 
-    PersonajeCampaña "0..*" -- "0..*" Objeto : tiene >
-    PersonajeCampaña "0..*" -- "0..*" Rasgo : tiene >
-    PersonajeCampaña "0..*" -- "0..*" Acción : tiene >
+    Campana "1" -- "0..*" PersonajeCampana : tiene >
+    Usuario "1" -- "0..*" PersonajeCampana : controla >
+    Jugable "1" -- "0..*" PersonajeCampana : instancia >
+
+    PersonajeCampana "0..*" -- "0..*" Objeto : tiene >
+    PersonajeCampana "0..*" -- "0..*" Rasgo : tiene >
+    PersonajeCampana "0..*" -- "0..*" Accion : tiene >
 ```
 
 ## Alcance Funcional 
@@ -180,7 +183,7 @@ Regularidad:
 |Req|Detalle|
 |:-|:-|
 |CRUD simple|1. CRUD Usuario<br>2. CRUD Campaña<br>3. CRUD Rasgo|
-|CRUD dependiente|1. CRUD Personaje {depende de} CRUD Usuario<br>2. CRUD Participación {depende de} CRUD Usuario CRUD Jugable y CRUD Campaña|
+|CRUD dependiente|1. CRUD Personaje {depende de} CRUD Usuario<br>2. CRUD Participación (PersonajeCampana) {depende de} CRUD Usuario, CRUD Jugable y CRUD Campaña|
 |Listado<br>+<br>detalle|1. Listado de campañas filtrado por estado, muestra nombre, master e imagen => detalle permite unirse y entrar a la sesión<br>2. Listado de NPC filtrado por estadoAgresión, muestra nombre y descripción => detalle con todos los atributos|
 |CUU/Epic|1. CUU Crear mapa para una campaña asignando imagen y dimensiones de grilla<br>2. CUU Posicionar y mover fichas de personajes o NPCs en la grilla bidimensional del mapa|
 
@@ -190,7 +193,7 @@ Regularidad:
 
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD Usuario<br>2. CRUD Campaña<br>3. CRUD Participación<br>4. CRUD Personaje<br>5. CRUD Jugable<br>6. CRUD NoJugable<br>7. CRUD Objeto<br>8. CRUD CatObjeto<br>9. CRUD Rasgo<br>10. CRUD Acción<br>11. CRUD Mapa|
+|CRUD |1. CRUD Usuario<br>2. CRUD Campaña<br>3. CRUD Participación (PersonajeCampana)<br>4. CRUD Personaje<br>5. CRUD Jugable<br>6. CRUD NoJugable<br>7. CRUD Objeto<br>8. CRUD CatObjeto<br>9. CRUD Rasgo<br>10. CRUD Acción<br>11. CRUD Mapa|
 |CUU/Epic|1. Crear un personaje con atributos, habilidades, estadísticas y objetos<br>2. Sistema de chat entre jugadores en partida.<br>3. Consultar estado y posición de fichas de personajes en el mapa activo<br>4. Modificar atributos y gestionar objetos durante la campaña|
 
 ---
